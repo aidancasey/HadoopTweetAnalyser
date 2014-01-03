@@ -5,17 +5,22 @@ var express = require('express')
   ,Twit = require('twit')
   , io = require('socket.io').listen(server);
 
+ // var azure = require('azure');
+
+
 var config = require('./config.json');
 
 io.set('log level', 1); 
 
 
 var RotatingLog = require('rotating-log')
-,   logfile     = '/tmp/Tweets.log'
-,   log         = RotatingLog(logfile, {keep:6, maxsize:12000000}) // 10MB in size
+,   logfile     = 'Z:/Downloads-2/Tweets/nye.log'
+,   log         = RotatingLog(logfile, {keep:200, maxsize:20000000}) // 10MB in size
 
 log.on('rotated', function () {
-    console.log('The log file was rotated.')
+    console.log('The log file was just rotated.')
+
+
 })
 log.on('error', function (err) {
     console.error('There was an error: %s', err.message || err)
@@ -29,7 +34,7 @@ app.get('/', function (req, res) {
 res.sendfile(__dirname + '/index.html');
 });
 
-var watchList = ['U2', 'Coldplay', 'lady gaga' , 'morrissey' ,'irfu', 'christmas'];
+var watchList = ['#nye', '#newyearseve', '#newyear' , '#newyears','#happynewyear', 'new year'];
  var T = new Twit({
     consumer_key:         config.consumer_key
   , consumer_secret:      config.consumer_secret
@@ -56,15 +61,38 @@ tweetText = tweetText.replace(/[\n\r\t]/g, '');
                   + tweetText +  '\t' 
                   + tweet.user.name +  '\t' 
                   + tweet.user.id_str +  '\t' 
-                  + tweet.user.screen_name  
-                  + '\n';
+                  + tweet.user.screen_name  +  '\t' ;
 
+    if (tweet.place==null)
+    {
 
-    console.log(tweetData);
+     tweetData = tweetData + '\t' +  '\t' +  '\t' +  '\t' +  '\t'   + '\n';
+
+    }               
+    else
+    {
+     tweetData = tweetData  + tweet.place.country_code  +  '\t' 
+                  + tweet.place.place_type  +  '\t' 
+                  + tweet.place.full_name  +  '\t' 
+                  + tweet.place.place_type  +  '\t';
+         if(tweet.place.bounding_box ==null)
+        {
+         tweetData = tweetData+ '\t';
+        }
+        else
+        {
+        tweetData = tweetData + tweet.place.bounding_box.coordinates +   '\t' ;
+        }
+    tweetData = tweetData+ '\n';
+                 
+    }
+
     log.write(tweetData);
 
-    //log.write( JSON.stringify(tweet) + '\n' );
     io.sockets.emit('stream',tweet.text);
+
+    //log.write( JSON.stringify(tweet) + '\n' );
+    //io.sockets.emit('stream',tweet.text);
 
 
   });

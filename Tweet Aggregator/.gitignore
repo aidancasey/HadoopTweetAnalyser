@@ -18,4 +18,5 @@ build
 
 node_modules
 
+process.env
 
