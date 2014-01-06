@@ -15,7 +15,7 @@ io.set('log level', 1);
 
 var RotatingLog = require('rotating-log')
 ,   logfile     = 'Z:/Downloads-2/Tweets/nye.log'
-,   log         = RotatingLog(logfile, {keep:200, maxsize:20000000}) // 10MB in size
+,   log         = RotatingLog(logfile, {keep:200, maxsize:20000000}) // 20MB in size
 
 log.on('rotated', function () {
     console.log('The log file was just rotated.')
