@@ -55,6 +55,16 @@
       padding: 15px;
     }
 
+      #blog {
+      position: absolute;
+      top: 90px;
+      width: 320px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      font: 20px/20px Georgia;
+      padding: 15px;
+    }
+
     .year {
 
       font: 16px Georgia;
@@ -104,10 +114,20 @@
    New Years Eve 2014 on Twitter (#nye over a 24 hour period)
 </div>
 
+<div id="blog">
+    <a href="http://acaseyblog.wordpress.com/2014/01/06/a-visualization-of-new-years-eve-2014-on-twitter"/>Read how this was built</a> 
+</div>
+
 <script type="text/javascript" src="/js/Detector.js"></script>
 <script type="text/javascript" src="/js/three.min.js"></script>
 <script type="text/javascript" src="/js/globe.js"></script>
 <script type="text/javascript">
+
+
+ if(!Detector.webgl){
+      Detector.addGetWebGLMessage();
+    }
+    
 
   var globe = DAT.Globe(document.getElementById('container'), function(label) {
     return new THREE.Color([
