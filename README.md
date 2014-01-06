@@ -2,18 +2,32 @@ HadoopTweetAnalyser
 ===================
 A node.js twitter stream aggregator and Hadoop file processor.
 
-The plan to tap into twitters streaming API on NYE , capture every new years tweet - '#nye' , '#hapynewyears'
-Aggregate the results in Hadoop and produce some nice global visualisations  of the results and trends using Google's WebGL Globe is an open platform  
 
 
+# Basic Usage
 
-Technologies
+Specify the key words/ hash tags you want to aggregate from the twitter streaming API 
+
+```javascript
+var watchList = ['#nye', '#newyearseve', '#newyear' , '#newyears','#happynewyear', 'new year'];
+];
+```
+
+Specify a  temporary folder location to store all tweets
+
+```javascript
+var RotatingLog = require('rotating-log')
+,   logfile     = 'Z:/Downloads-2/Tweets/nye.log'
+,   log         = RotatingLog(logfile, {keep:200, maxsize:20000000}) // 20MB in size
+```
+
+Ingest and Aggregate the tweets into Hapdoop Distribution (HDInsight) , aggregate by geo -location
+
+Generate a JSON file of the output to visualize using Google Chromes Web GL Globe project
+
+# Technologies
 
 - node.js
 - HIVE & HDInsight ( Hadoop distribution on Windows Azure)
 - C#.NET to submit jobs to Hive
 - Chrome Experiments - WebGL Globe
-
-
-
-
