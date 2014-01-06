@@ -31,3 +31,7 @@ Generate a JSON file of the output to visualize using Google Chromes Web GL Glob
 - HIVE & HDInsight ( Hadoop distribution on Windows Azure)
 - C#.NET to submit jobs to Hive
 - Chrome Experiments - WebGL Globe
+
+# More Info
+
+http://acaseyblog.wordpress.com/2014/01/06/a-visualization-of-new-years-eve-2014-on-twitter/
