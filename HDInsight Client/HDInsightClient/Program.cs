@@ -68,7 +68,7 @@ namespace SubmitHiveJob
                              " CREATE EXTERNAL TABLE GEOLOCATIONS (latitude string, longitude string, magnitude string);" +
                               " INSERT OVERWRITE TABLE GEOLOCATIONS " +
                              " select  coordinates[1],coordinates[0], count(coordinates[0]) from tweets  where coordinates[0] is not null group by coordinates[0],coordinates[1] ;" +
-                             " select * from GEOLOCATIONS LIMIT 5"
+                             " select count(*) as LocationCount  from GEOLOCATIONS"
             };
 
             // Submit the Hive job
@@ -100,8 +100,8 @@ namespace SubmitHiveJob
             var hiveJobDefinition = new HiveJobCreateParameters()
             {
                 JobName = "show tables job",
-                StatusFolder = "/AAAShowTables",
-                Query = "select * from GEOLOCATIONS;"
+                StatusFolder = "/AAFooBar",
+                Query = "select * from tweets where placeName like '%Sydney %';"
             };
 
             // Submit the Hive job
@@ -134,7 +134,11 @@ namespace SubmitHiveJob
                                          };
 
             var creds = GenerateJobSubmissionCert(settings);
-            AggregateGeoLocations(creds);
+
+            Console.WriteLine("START " + DateTime.Now.ToLongTimeString());
+            TestBasicQuery(creds);
+             
+            Console.WriteLine("END " + DateTime.Now.ToLongTimeString());
 
             Console.WriteLine("Press ENTER to continue.");
             Console.ReadLine();

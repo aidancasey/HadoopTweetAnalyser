@@ -16,6 +16,7 @@ pids
 logs
 results
 build
+hack_scripts
 
 node_modules
 
