@@ -3,7 +3,7 @@
     "consumer_secret" : "",
     "access_token" : "",
     "access_token_secret" : "",
-    "log_directory" :"/tmp/rotating-log-demo.log",
+    "log_directory" : "C:\\logs\\tweets.log",
     "log_size" :"5120",
-    "tweet_keywords":"'#nye', '#newyearseve', '#newyear' , '#newyears','#happynewyear', 'new year'"
+    "tweet_keywords": "#nye,#newyearseve,#newyear,#newyears,#happynewyear,new year"
 }

@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
 });
 
-var watchList = ['#nye', '#newyearseve', '#newyear', '#newyears', '#happynewyear', 'new year'];
+var watchList = config.tweet_keywords.split(",");;
 var twit = new Twit({
     consumer_key: config.consumer_key,
     consumer_secret: config.consumer_secret,
